@@ -5,7 +5,9 @@ const BurgerStack = (props) => {
       {props.ingredient.map((ingredient) => (
         <li style={{ backgroundColor: ingredient.color }}>
           {ingredient.name}
-          <button>+</button>
+          <button onClick={() => props.handleAddRemoveIngredient(ingredient)}>
+            Add Ingredient{" "}
+          </button>
         </li>
       ))}
     </ul>

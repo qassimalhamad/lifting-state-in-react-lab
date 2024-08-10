@@ -22,17 +22,31 @@ export const availableIngredients = [
   { name: "Swiss Cheese", color: "#F1E1A8" },
 ];
 
-// const [stack, setStack] = useState;
-
 const App = () => {
-  function addToBurger() {}
-  function removeFromBurger() {}
+  const [stack, setStack] = useState(availableIngredients);
+  const [userStack, setUserStack] = useState([]);
+
+  const handleAddRemoveIngredient = (ingredient) => {
+    if (userStack.includes(ingredient)) {
+      setUserStack(userStack.filter((el) => el.name !== ingredient.name));
+      setStack([...stack, ingredient]);
+    } else {
+      setUserStack([...userStack, ingredient]);
+      setStack(stack.filter((el) => el.name !== ingredient.name));
+    }
+  };
   return (
     <main>
       <h1>Burger Stacker</h1>
       <section>
-        <BurgerStack ingredient={availableIngredients} />
-        <IngredientList ingredient={availableIngredients} />
+        <BurgerStack
+          ingredient={stack}
+          handleAddRemoveIngredient={handleAddRemoveIngredient}
+        />
+        <IngredientList
+          ingredient={userStack}
+          handleAddRemoveIngredient={handleAddRemoveIngredient}
+        />
       </section>
     </main>
   );
